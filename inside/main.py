@@ -12,8 +12,11 @@ def cli():
 @click.command()
 @click.option("--root", required=True, help="root note with alteration in flat. e.g. Db")
 @click.option("--name", required=True, help="scale name")
-def scale(root, name):
+@click.option("--descend", is_flag=True, help="descending ordered")
+def scale(root, name, descend):
     notes = SequenceGenerator.generate_scale(Note[root], name)
+    if descend:
+        notes.reverse()
     pprint_notes(notes, color=True)
 
 
@@ -21,8 +24,11 @@ def scale(root, name):
 @click.option("--root", required=True, help="root note with alteration in flat. e.g. Db")
 @click.option("--name", required=True, help="triad name. e.g aug")
 @click.option("--inversion", default=0, help="degree of inversion", type=click.IntRange(0, 2))
-def triad(root, name, inversion):
+@click.option("--descend", is_flag=True, help="descending ordered")
+def triad(root, name, inversion, descend):
     notes = SequenceGenerator.generate_triad(Note[root], name, inversion)
+    if descend:
+        notes.reverse()
     pprint_notes(notes, color=True)
 
 
@@ -30,8 +36,11 @@ def triad(root, name, inversion):
 @click.option("--root", required=True, help="root note with alteration in flat. e.g. Db")
 @click.option("--name", required=True, help="seventh name. e.g. min7b5")
 @click.option("--inversion", default=0, help="degree of inversion", type=click.IntRange(0, 3))
-def seventh(root, name, inversion):
+@click.option("--descend", is_flag=True, help="descending ordered")
+def seventh(root, name, inversion, descend):
     notes = SequenceGenerator.generate_seventh(Note[root], name, inversion)
+    if descend:
+        notes.reverse()
     pprint_notes(notes, color=True)
 
 

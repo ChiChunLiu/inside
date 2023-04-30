@@ -11,7 +11,9 @@ class SequenceGenerator:
     @staticmethod
     def _intervals_to_notes(start: Note, intervals: list[int]) -> list[Note]:
         accumulated_intervals = itertools.accumulate(intervals)
-        return [Note((start + a) % 12) for a in accumulated_intervals]
+        notes = [Note((start + a) % 12) for a in accumulated_intervals]
+
+        return notes
 
     @classmethod
     def generate_scale(cls, root: Note, name: str) -> list[Note]:
@@ -27,7 +29,9 @@ class SequenceGenerator:
         notes = itertools.cycle(SequenceGenerator._intervals_to_notes(start=root, intervals=intervals))
         for _ in range(inversion):
             next(notes)
-        return [next(notes) for _ in range(cls.num_notes_triad)]
+        triad = [next(notes) for _ in range(cls.num_notes_triad)]
+
+        return triad
 
     @classmethod
     def generate_seventh(cls, root: Note, name: str, inversion: int = 0) -> list[Note]:
@@ -35,4 +39,6 @@ class SequenceGenerator:
         notes = itertools.cycle(SequenceGenerator._intervals_to_notes(start=root, intervals=intervals))
         for _ in range(inversion):
             next(notes)
-        return [next(notes) for _ in range(cls.num_notes_seventh)]
+        seventh = [next(notes) for _ in range(cls.num_notes_seventh)]
+
+        return seventh
