@@ -6,8 +6,8 @@ Inside is a CLI tool for harmony studies.
 Run `pip install -r requirements.txt` and `pip install -e .`
 
 ## Basic usage
-`inside triad --root Db --name aug --inversion 1`
-
+`inside triad --root Db --name aug --inversion 1`  
+`inside scale --root C --name lydian`
 
 ## LISCENSE
-MIT
+BSD-3-Clause
