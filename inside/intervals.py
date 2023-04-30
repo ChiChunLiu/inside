@@ -25,3 +25,16 @@ SCALE_OFFSETS = {
     "aeolian": 5,
     "locrian": 6,
 }
+
+
+SCALE_OFFSETS_HALF_STEP = {
+    "major": 0,
+    "minor": 9,
+    "ionian": 0,
+    "dorian": 2,
+    "phrygian": 4,
+    "lydian": 5,
+    "mixolydian": 7,
+    "aeolian": 9,
+    "locrian": 11,
+}

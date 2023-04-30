@@ -1,7 +1,8 @@
 import click
 from inside.sequence_generator import SequenceGenerator
-from inside.utils import pprint_notes
+from inside.utils import pprint_notes, get_signature
 from inside.notes import Note
+from inside.intervals import SCALE_OFFSETS_HALF_STEP
 
 
 @click.group()
@@ -17,7 +18,9 @@ def scale(root, name, descend):
     notes = SequenceGenerator.generate_scale(Note[root], name)
     if descend:
         notes.reverse()
-    pprint_notes(notes, color=True)
+    key_center = (Note[root] - SCALE_OFFSETS_HALF_STEP[name] + 12) % 12
+    sig = get_signature(key_center)
+    pprint_notes(notes, color=True, orient=sig)
 
 
 @click.command()
@@ -29,7 +32,7 @@ def triad(root, name, inversion, descend):
     notes = SequenceGenerator.generate_triad(Note[root], name, inversion)
     if descend:
         notes.reverse()
-    pprint_notes(notes, color=True)
+    pprint_notes(notes, color=True, orient="flat")
 
 
 @click.command()
@@ -41,7 +44,7 @@ def seventh(root, name, inversion, descend):
     notes = SequenceGenerator.generate_seventh(Note[root], name, inversion)
     if descend:
         notes.reverse()
-    pprint_notes(notes, color=True)
+    pprint_notes(notes, color=True, orient="flat")
 
 
 cli.add_command(scale)

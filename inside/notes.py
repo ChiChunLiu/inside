@@ -1,6 +1,9 @@
 from enum import IntEnum
 
 
+FLAT_TO_SHARP = {"Db": "C#", "Eb": "D#", "Gb": "F#", "Ab": "G#", "Bb": "A#"}
+
+
 class Note(IntEnum):
     C = 0
     Db = 1
@@ -17,3 +20,9 @@ class Note(IntEnum):
 
     def __str__(self):
         return self.name
+
+    def strfnote(self, orient="flat"):
+        if orient == "sharp" and self.name in FLAT_TO_SHARP:
+            return FLAT_TO_SHARP[self.name]
+        else:
+            return self.name
