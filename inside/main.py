@@ -20,7 +20,7 @@ def scale(root, name, descend):
         notes.reverse()
     key_center = (Note[root] - SCALE_OFFSETS_HALF_STEP[name] + 12) % 12
     sig = get_signature(key_center)
-    pprint_notes(notes, color=True, orient=sig)
+    pprint_notes(notes, root=Note[root], color=True, orient=sig)
 
 
 @click.command()
@@ -32,7 +32,7 @@ def triad(root, name, inversion, descend):
     notes = SequenceGenerator.generate_triad(Note[root], name, inversion)
     if descend:
         notes.reverse()
-    pprint_notes(notes, color=True, orient="flat")
+    pprint_notes(notes, root=Note[root], color=True, orient="flat")
 
 
 @click.command()
@@ -44,7 +44,7 @@ def seventh(root, name, inversion, descend):
     notes = SequenceGenerator.generate_seventh(Note[root], name, inversion)
     if descend:
         notes.reverse()
-    pprint_notes(notes, color=True, orient="flat")
+    pprint_notes(notes, root=Note[root], color=True, orient="flat")
 
 
 cli.add_command(scale)
