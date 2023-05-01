@@ -12,6 +12,7 @@ SEVENTH_INTERVLAS = {
     "minmaj": (3, 4, 4),
     "min7b5": (3, 3, 4),
     "dom": (4, 3, 3),
+    "maj7#5": (4, 4, 3),
 }
 
 SCALE_OFFSETS = {
@@ -37,4 +38,11 @@ SCALE_OFFSETS_HALF_STEP = {
     "mixolydian": 7,
     "aeolian": 9,
     "locrian": 11,
+}
+
+SEVENTH_PROGRESSIONS = {
+    "major": ("maj", "min", "min", "maj", "dom", "min7b5", "min"),
+    "natural_minor": ("min", "min7b5", "maj", "min", "min", "major", "dom"),
+    "harmonic_minor": ("minmaj", "min7b5", "maj7#5", "min", "dom", "maj", "dim"),
+    "melodic_minor": ("minmaj", "min", "maj7#5", "dom", "dom", "min75b", "min7b5"),
 }
