@@ -48,7 +48,7 @@ def transpose(mat: list[list[T]]) -> list[list[T]]:
     m = len(mat)
     n = len(mat[0])
 
-    transposed = [[None for _ in range(m)] for _ in range(n)]
+    transposed = [[mat[0][0] for _ in range(m)] for _ in range(n)]
     for i in range(m):
         for j in range(n):
             transposed[j][i] = mat[i][j]
