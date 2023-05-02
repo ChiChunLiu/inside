@@ -61,9 +61,8 @@ def progression(key, mode, progression, inversion, layout):
         key_center=Note[key], mode=mode, progression_name=progression, inversion=inversion
     )
     roots = SequenceGenerator.generate_scale(root=Note[key], name=mode)
-    s = stringify_notes_multiline(
-        _progression, layout=layout, roots=roots, color=True, orient="flat", ljust=2
-    )
+    sig = get_signature(Note[key])
+    s = stringify_notes_multiline(_progression, layout=layout, roots=roots, color=True, orient=sig, ljust=2)
     print(s)
 
 
