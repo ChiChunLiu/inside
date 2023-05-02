@@ -17,27 +17,47 @@ def get_signature(key_center: int) -> str:
         raise ValueError(f"key center {key_center} not supported")
 
 
-def pprint_single_line(
+def stringify_notes(
+    notes: list[Note],
+    root: Optional[Note] = None,
+    color: bool = True,
+    orient: str = "flat",
+    ljust: Optional[int] = None,
+) -> list[str]:
+    outputs = [n.strfnote(color=(n == root) if color else False, orient=orient, ljust=ljust) for n in notes]
+
+    return outputs
+
+
+def stringify_notes_singleline(
     notes: list[Note],
     root: Optional[Note] = None,
     color: bool = True,
     orient: str = "flat",
     ljust: Optional[int] = None,
 ) -> str:
-    outputs = [n.strfnote(color=(n == root) if color else False, orient=orient, ljust=ljust) for n in notes]
+    output = stringify_notes(notes, root, color, orient, ljust)
 
-    return " ".join(outputs)
+    return " ".join(output)
 
 
 T = TypeVar("T")
 
 
-def transpose(array: list[list[T]]) -> list[list[T]]:
-    return array
+def transpose(mat: list[list[T]]) -> list[list[T]]:
+    m = len(mat)
+    n = len(mat[0])
+
+    transposed = [[None for _ in range(m)] for _ in range(n)]
+    for i in range(m):
+        for j in range(n):
+            transposed[j][i] = mat[i][j]
+
+    return transposed
 
 
-# TODO: allow coloring roots in vertical layout
-def pprint_multiple_lines(
+# TODO: refactor to avoid splitting
+def stringify_notes_multiline(
     notes_sequence: list[list[Note]],
     layout: str = "h",
     roots: Optional[list[Note]] = None,
@@ -50,6 +70,10 @@ def pprint_multiple_lines(
     else:
         root_notes_pairs = [(None, notes) for notes in notes_sequence]
 
-    lines = [pprint_single_line(notes, root, color, orient, ljust) for root, notes in root_notes_pairs]
+    lines = [stringify_notes(notes, root, color, orient, ljust) for root, notes in root_notes_pairs]
+
+    if layout == "v":
+        lines = transpose(lines)
+    lines = [" ".join(line) for line in lines]
 
     return "\n".join(lines)

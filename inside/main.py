@@ -1,6 +1,6 @@
 import click
 from inside.sequence_generator import SequenceGenerator
-from inside.utils import get_signature, pprint_multiple_lines, pprint_single_line
+from inside.utils import get_signature, stringify_notes_singleline, stringify_notes_multiline
 from inside.notes import Note
 from inside.intervals import SCALE_OFFSETS_HALF_STEP
 
@@ -20,7 +20,7 @@ def scale(root, name, descend):
         notes.reverse()
     key_center = (Note[root] - SCALE_OFFSETS_HALF_STEP[name] + 12) % 12
     sig = get_signature(key_center)
-    s = pprint_single_line(notes, root=Note[root], color=True, orient=sig)
+    s = stringify_notes_singleline(notes, root=Note[root], color=True, orient=sig)
     print(s)
 
 
@@ -33,7 +33,7 @@ def triad(root, name, inversion, descend):
     notes = SequenceGenerator.generate_triad(Note[root], name, inversion)
     if descend:
         notes.reverse()
-    s = pprint_single_line(notes, root=Note[root], color=True, orient="flat")
+    s = stringify_notes_singleline(notes, root=Note[root], color=True, orient="flat")
     print(s)
 
 
@@ -46,7 +46,7 @@ def seventh(root, name, inversion, descend):
     notes = SequenceGenerator.generate_seventh(Note[root], name, inversion)
     if descend:
         notes.reverse()
-    s = pprint_single_line(notes, root=Note[root], color=True, orient="flat")
+    s = stringify_notes_singleline(notes, root=Note[root], color=True, orient="flat")
     print(s)
 
 
@@ -61,7 +61,9 @@ def progression(key, mode, progression, inversion, layout):
         key_center=Note[key], mode=mode, progression_name=progression, inversion=inversion
     )
     roots = SequenceGenerator.generate_scale(root=Note[key], name=mode)
-    s = pprint_multiple_lines(_progression, layout=layout, roots=roots, color=True, orient="flat", ljust=2)
+    s = stringify_notes_multiline(
+        _progression, layout=layout, roots=roots, color=True, orient="flat", ljust=2
+    )
     print(s)
 
 

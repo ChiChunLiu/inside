@@ -41,7 +41,7 @@ SCALE_OFFSETS_HALF_STEP = {
 }
 
 SEVENTH_PROGRESSIONS = {
-    "major": ("maj", "min", "min", "maj", "dom", "min7b5", "min"),
+    "major": ("maj", "min", "min", "maj", "dom", "min", "min7b5"),
     "natural_minor": ("min", "min7b5", "maj", "min", "min", "major", "dom"),
     "harmonic_minor": ("minmaj", "min7b5", "maj7#5", "min", "dom", "maj", "dim"),
     "melodic_minor": ("minmaj", "min", "maj7#5", "dom", "dom", "min75b", "min7b5"),
