@@ -53,6 +53,8 @@ def transpose(mat: list[list[T]]) -> list[list[T]]:
         for j in range(n):
             transposed[j][i] = mat[i][j]
 
+    transposed.reverse()
+
     return transposed
 
 
