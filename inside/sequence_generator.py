@@ -1,5 +1,5 @@
 from .notes import Note
-from .intervals import (
+from .const import (
     MAJOR_SCALE_INTERVALS,
     TRIAD_INTERVALS,
     SEVENTH_INTERVLAS,

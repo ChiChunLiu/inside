@@ -2,7 +2,7 @@ import click
 from inside.sequence_generator import SequenceGenerator
 from inside.utils import get_signature, stringify_notes_singleline, stringify_notes_multiline
 from inside.notes import Note
-from inside.intervals import SCALE_OFFSETS_HALF_STEP
+from inside.const import SCALE_OFFSETS_HALF_STEP, PROGRESSIONS
 
 
 @click.group()
@@ -61,8 +61,6 @@ def seventh(root, name, inversion, descend):
 @click.option("--inversion", default=0, help="degree of inversion", type=click.IntRange(0, 3))
 @click.option("--layout", default="h", help="(h)orizontal or (v)ertical")
 def progression(key, mode, progression, inversion, layout):
-    from inside.intervals import PROGRESSIONS
-
     _progression = SequenceGenerator.generate_seventh_progression(
         key_center=Note[key], mode=mode, progression_name=progression, inversion=inversion
     )
