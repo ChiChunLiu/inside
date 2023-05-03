@@ -61,10 +61,15 @@ def seventh(root, name, inversion, descend):
 @click.option("--inversion", default=0, help="degree of inversion", type=click.IntRange(0, 3))
 @click.option("--layout", default="h", help="(h)orizontal or (v)ertical")
 def progression(key, mode, progression, inversion, layout):
+    from inside.intervals import PROGRESSIONS
+
     _progression = SequenceGenerator.generate_seventh_progression(
         key_center=Note[key], mode=mode, progression_name=progression, inversion=inversion
     )
+    progression_idx = PROGRESSIONS[progression]
     roots = SequenceGenerator.generate_scale(root=Note[key], name=mode)
+    roots = [roots[i] for i in progression_idx]
+
     sig = get_signature(Note[key])
     s = stringify_notes_multiline(_progression, layout=layout, roots=roots, color=True, orient=sig, ljust=2)
     print(s)
