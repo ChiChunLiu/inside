@@ -53,7 +53,11 @@ def seventh(root, name, inversion, descend):
 @click.command()
 @click.option("--key", required=True, help="key center with alteration in flat. e.g. Db")
 @click.option("--mode", required=True, help="major/natural_minor/melodic_minor/harmonic_minor")
-@click.option("--progression", required=True, help="name of progression. e.g. diatonic or ii-v-i")
+@click.option(
+    "--progression",
+    required=True,
+    help="name of progression. e.g. ii-v-i. Please input diatonic for all diatonic harmonization",
+)
 @click.option("--inversion", default=0, help="degree of inversion", type=click.IntRange(0, 3))
 @click.option("--layout", default="h", help="(h)orizontal or (v)ertical")
 def progression(key, mode, progression, inversion, layout):

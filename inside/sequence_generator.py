@@ -4,7 +4,8 @@ from .intervals import (
     TRIAD_INTERVALS,
     SEVENTH_INTERVLAS,
     SCALE_OFFSETS,
-    SEVENTH_PROGRESSIONS,
+    DIATONIC_HARMONIZATION,
+    PROGRESSIONS,
 )
 import itertools
 
@@ -53,9 +54,15 @@ class SequenceGenerator:
     def generate_seventh_progression(
         cls, key_center: Note, mode: str, progression_name: str, inversion: int = 0
     ) -> list[list[Note]]:
-        roots = cls.generate_scale(root=key_center, name=mode)
-        # TOOD: support progression
-        sevenths = SEVENTH_PROGRESSIONS[mode]
-        progression = {note: seventh_name for note, seventh_name in zip(roots, sevenths)}
+        progression = PROGRESSIONS[progression_name]
 
-        return [cls.generate_seventh(root, name, inversion=inversion) for root, name in progression.items()]
+        roots = cls.generate_scale(root=key_center, name=mode)
+        roots = [roots[i] for i in progression]
+        sevenths = DIATONIC_HARMONIZATION[mode]
+        sevenths = [sevenths[i] for i in progression]
+
+        root_name_pairs = {note: seventh_name for note, seventh_name in zip(roots, sevenths)}
+
+        return [
+            cls.generate_seventh(root, name, inversion=inversion) for root, name in root_name_pairs.items()
+        ]
